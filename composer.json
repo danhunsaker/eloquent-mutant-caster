@@ -1,0 +1,22 @@
+{
+    "name": "danhunsaker/eloquent-mutant-caster",
+    "description": "Extend Eloquent's attribute casting feature to support applying a single mutator/accessor pair to multiple fields",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dan Hunsaker",
+            "email": "danhunsaker@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^5.0"
+    },
+    "suggests": {
+        "ext-gmp": "Needed for the CastIP trait, in order to support IPv6 addresses. (*)"
+    },
+    "autoload": {
+        "psr-4": {
+            "Danhunsaker\\Eloquent\\": "src/"
+        }
+    }
+}
