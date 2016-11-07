@@ -63,23 +63,38 @@ Note that you don't need both an accessor and a mutator - you can simply create
 whichever of the two you need for your new type, and everything will continue to
 flow smoothly.
 
-### Caster Traits ###
+### Caster Traits
 
 The recommended way to use this library is by writing traits for each of your
 new types, then including those traits on whichever models will use it.  One
 such trait is included both as an example and for those who wish to use it.
 
-#### CastIP ####
+#### CastIP
 
 `CastIP` is a trait for handling IP addresses.  It requires the GMP extension,
 which allows it to support both IPv4 and IPv6, and stores the address in your
 database as an integer.  Because IPv6 addresses use 128 bits, you may not be
 able to use your database's integer types to store these addresses - I recommend
 a `DECIMAL(40, 0)` column instead, but you can use any field type which will
-hold the value correctly.
+hold the value correctly (including a string type).
 
 To use the trait, simply include it in your model, and set your `$casts`
-property to use `ip` appropriately.
+property to use `ip` appropriately:
+
+```php
+use Danhunsaker\Eloquent\Traits\CastIP;
+use Danhunsaker\Eloquent\Traits\MutantCaster;
+use Illuminate\Database\Eloquent\Model;
+
+class BaseModel extends Model
+{
+    use MutantCaster, CastIP;
+
+    protected $casts = [
+        'field' => 'ip',
+    ];
+}
+```
 
 Contributions
 -------------
